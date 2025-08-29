@@ -99,12 +99,10 @@
       btn.style.top = Math.random() * 90 + 'vh';
     }
 
-    // Le bouton fuit quand on s'approche
     btn.addEventListener('mouseover', () => {
       moveButton();
     });
 
-    // Le bouton est cliqué (attrapé)
     btn.addEventListener('click', () => {
       score++;
       scoreDisplay.textContent = score;
