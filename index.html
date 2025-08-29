@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Attrape-moi !</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url('./haha.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    .container {
+      width: 100vw;
+      height: 100vh;
+      backdrop-filter: blur(6px);
+      background: linear-gradient(to bottom right, #00000088, #00000066);
+      position: relative;
+    }
+
+    .atrp {
+      padding: 18px 32px;
+      background: linear-gradient(135deg, #ff4d4d, #ff0000);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+      position: absolute;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      animation: pulse 1.5s infinite;
+    }
+
+    .atrp:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 24px rgba(255, 0, 0, 0.6);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .scoreboard {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      z-index: 999;
+    }
+
+    .message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #00c853;
+      color: white;
+      padding: 20px 40px;
+      border-radius: 12px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+      display: none;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="scoreboard">Score : <span id="score">0</span></div>
+    <div class="message" id="winMessage">Bravo ! Tu as gagné !</div>
+    <button class="atrp">Attrape-moi !</button>
+  </div>
+
+  <script>
+    const btn = document.querySelector('.atrp');
+    const scoreDisplay = document.getElementById('score');
+    const winMessage = document.getElementById('winMessage');
+
+    let score = 0;
+    let size = 1.0;
+
+    function moveButton() {
+      btn.style.left = Math.random() * 90 + 'vw';
+      btn.style.top = Math.random() * 90 + 'vh';
+    }
+
+    btn.addEventListener('mouseover', () => {
+      moveButton();
+    });
+
+    btn.addEventListener('click', () => {
+      score++;
+      scoreDisplay.textContent = score;
+
+      size -= 0.05;
+      btn.style.transform = `scale(${size})`;
+
+      moveButton();
+
+      if (score >= 10) {
+        winMessage.style.display = 'block';
+        btn.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
