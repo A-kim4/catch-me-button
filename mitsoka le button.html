@@ -92,26 +92,25 @@
     const winMessage = document.getElementById('winMessage');
 
     let score = 0;
-    let speed = 1000;
-    let size = 1.0;  
+    let size = 1.0;
 
     function moveButton() {
       btn.style.left = Math.random() * 90 + 'vw';
       btn.style.top = Math.random() * 90 + 'vh';
     }
 
+    // Le bouton fuit quand on s'approche
     btn.addEventListener('mouseover', () => {
       moveButton();
     });
 
+    // Le bouton est cliqué (attrapé)
     btn.addEventListener('click', () => {
       score++;
       scoreDisplay.textContent = score;
 
       size -= 0.05;
       btn.style.transform = `scale(${size})`;
-
-      speed = Math.max(300, speed - 50);
 
       moveButton();
 
@@ -120,10 +119,6 @@
         btn.style.display = 'none';
       }
     });
-
-    setInterval(() => {
-      moveButton();
-    }, speed);
   </script>
 </body>
 </html>
